@@ -2,6 +2,8 @@ package lab4.ui;
 
 import lab4.game.*;
 
+import com.diogonunes.jcolor.Ansi;
+import static com.diogonunes.jcolor.Attribute.*;
 import java.util.Scanner;
 
 /**
@@ -19,7 +21,7 @@ public class Console {
      * @return The user's response
      */
     public static String prompt(String promptMessage) {
-        System.out.print(promptMessage);
+        System.out.print(Ansi.colorize(promptMessage, CYAN_TEXT(), BOLD()));
         var scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
@@ -43,7 +45,7 @@ public class Console {
 
 
         var scanner = new Scanner(System.in);
-        final String helpMessage = "Input must be in the format 'row column', e.g., '1 2' or 't m' for the top middle cell.";
+        final String helpMessage = Ansi.colorize( "Input must be in the format 'row column', e.g., '1 2' or 't m' for the top middle cell.", RED_TEXT(), BOLD() );
 
         while ( true ) {
             System.out.print(prompt);
@@ -67,7 +69,7 @@ public class Console {
                 var pos = new Position(Row.from(parts[0]), Col.from(parts[1]));
 
                 if (board.isOccupiedAt(pos)) {
-                    System.out.println("That position is already taken.");
+                    System.out.println(Ansi.colorize("That position is already taken.", YELLOW_TEXT(), BOLD()));
                     continue;
                 }
 
